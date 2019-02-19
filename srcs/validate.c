@@ -5,23 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 13:40:58 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/18 16:08:40 by cbagdon          ###   ########.fr       */
+/*   Created: 2019/02/19 14:39:52 by cbagdon           #+#    #+#             */
+/*   Updated: 2019/02/19 14:42:22 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "../includes/fillit.h"
 
-static int		validate_file(int fd, int chars, int lines)
+int		validate_file(int fd, int chars, int lines, int *tetriminos)
 {
 	char	buf;
 
 	while (read(fd, &buf, 1))
 	{
-		CHECK_BAD(!VALID_CHAR(buf));
-		if (buf == '\n')
+		if (!VALID_CHAR(buf))
+			return (0);
+		else if (buf == '\n')
 		{
 			lines++;
 			read(fd, &buf, 1);
@@ -29,7 +28,10 @@ static int		validate_file(int fd, int chars, int lines)
 					!VALID_CHAR(buf));
 			chars = 0;
 			if (buf == '\n' && lines == 4)
+			{
 				lines = 0;
+				*tetriminos += 1;
+			}
 			else
 				chars++;
 		}
@@ -39,15 +41,26 @@ static int		validate_file(int fd, int chars, int lines)
 	return (1);
 }
 
-int		main(int argc, char *argv[])
+int		valid_tetrimino(char *arr)
 {
-	(void)argc;
-	int		fd;
+	int		i;
+	int		squares;
+	int		connections;
 
-	fd = open(argv[1], O_RDONLY);
-	if (validate_file(fd, 0, 0))
-		printf("OK\n");
-	else
-		printf("NOPE\n");
-	return (0);
+	i = -1;
+	squares = 0;
+	connections = 0;
+	while (arr[++i])
+	{
+		if (FILLED(arr[i]) == 1)
+		{
+			squares++;
+			if ((i > 3 && FILLED(arr[i - 4])) || FILLED(arr[i + 4]))
+				connections++;
+			if ((i > 0 && FILLED(arr[i - 1])) || FILLED(arr[i + 1]))
+				connections++;
+		}
+	}
+	CHECK_BAD(squares != 4 || (connections != 8 && connections != 6));
+	return (1);
 }
