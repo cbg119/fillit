@@ -6,11 +6,11 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:15:45 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/15 14:22:17 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/02/19 17:56:03 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 static t_list	*ft_save_content(t_list **save, int fd)
 {
