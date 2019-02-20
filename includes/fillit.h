@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 21:57:41 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/19 22:55:32 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int				**construct_tetrimino(char *line);
 int				validate_file(int fd, int chars, int lines, int *tetriminos);
 char			**make_array(int tetriminos, char *file);
 int				valid_tetrimino(char *arr);
+int				***build_offset_arr(char **board, int tet_count);
 
 #endif

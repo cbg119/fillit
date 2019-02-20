@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 14:39:52 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 22:31:02 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/19 22:44:10 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,3 @@ int		**construct_tetrimino(char *line)
 	ret[squares] = NULL;
 	return (ret);
 }
-
-

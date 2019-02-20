@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:27:56 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 22:09:55 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/19 23:03:26 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,34 @@ void	print_array(char **board, int tet_count)
 void	print_array(char **board, int tet_count)
 {
 	int		i;
-	int		**container;
-	int		cursq;
+	int		***container;
 
 	i = 0;
+	container = build_offset_arr(board, tet_count);
 	while (i < tet_count)
 	{
-		cursq = 0;
-		container = construct_tetrimino(board[i]);
-		while (container[cursq] != NULL)
-		{
-			ft_putnbr(container[cursq][0]);
-			ft_putstr(" , ");
-			ft_putnbr(container[cursq++][1]);
-			ft_putchar('\n');
-		}
 		ft_putstr(board[i]);
 		ft_putnbr(valid_tetrimino(board[i]));
 		ft_putchar('\n');
 		i++;
 	}
+	i = 0;
+	while (i < tet_count)
+	{
+		ft_putnbr(container[i][3][1]);
+		i++;
+	}
+}
+
+int		***build_offset_arr(char **board, int tet_count)
+{
+	int		i;
+	int		***ret;
+
+	i = -1;
+	MEMCHK((ret = (int***)malloc(sizeof(int**) * (tet_count + 1))));
+	while (++i < tet_count)
+		ret[i] = construct_tetrimino(board[i]);
+	ret[i] = NULL;
+	return (ret);
 }
