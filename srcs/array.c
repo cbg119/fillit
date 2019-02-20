@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:27:56 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 23:03:26 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/20 15:53:47 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,14 @@ void	print_array(char **board, int tet_count)
 		i++;
 	}
 	i = 0;
-	while (i < tet_count)
+	board = init_board(tet_count);
+	if (can_place(board, container[0], 2, 2))
+		place_tet(board, container[0], 2, 2, 0);
+	i = 0;
+	while (board[i])
 	{
-		ft_putnbr(container[i][3][1]);
-		i++;
+		ft_putstr(board[i++]);
+		ft_putchar('\n');
 	}
 }
 

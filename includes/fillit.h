@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 22:55:32 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/20 15:51:13 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@
 
 char			**fill_array(char **tetriminos, int fd);
 void			print_array(char **board, int tet_count);
+void			place_tet(char **board, int **tet, int x, int y, int num);
 int				**construct_tetrimino(char *line);
 int				validate_file(int fd, int chars, int lines, int *tetriminos);
 char			**make_array(int tetriminos, char *file);
 int				valid_tetrimino(char *arr);
 int				***build_offset_arr(char **board, int tet_count);
+int				can_place(char **board, int **tet, int x, int y);
+char			**grow_board(char **board);
+char			**init_board(int tetriminos);
 
 #endif
