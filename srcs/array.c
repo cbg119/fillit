@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/18 18:27:56 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 04:41:12 by alkozma          ###   ########.fr       */
+/*   Created: 2019/02/21 07:22:23 by alkozma           #+#    #+#             */
+/*   Updated: 2019/02/21 07:24:14 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,79 +83,31 @@ int		***build_offset_arr(char **board, int tet_count)
 	return (ret);
 }
 
-int		is_solved(char **board, int tet_num)
+int		**construct_tetrimino(char *line)
 {
-	int i;
+	int		xy[2];
+	int		squares;
+	int		startxy[2];
+	int		**ret;
 
-	i = -1;
-	while (++i < tet_num)
-		if (!is_placed(i, board))
-			return (0);
-	return (1);
-}
-
-void	print_board(char **board)
-{
-	while (*board)
+	xy[0] = 0;
+	xy[1] = 0;
+	squares = 0;
+	MEMCHK((ret = (int**)malloc(sizeof(int*) * 5)));
+	while (*line)
 	{
-		ft_putstr(*board++);
-		ft_putchar('\n');
-	}
-}
-
-int		solve_board(char **board, int ***tets, int tet_num)
-{
-	int i;
-	int x;
-	int y;
-
-	i = 0;
-	x = 0;
-	y = 0;
-	while (is_placed(i, board))
-		i++;
-	while (!is_placed(i, board))
-	{
-		while (!can_place(board, tets[i], x, y))
+		MEMCHK((ret[squares] = (int*)malloc(sizeof(int) * 3)));
+		if (FILLED(*line++) == 1)
 		{
-			y += (++x / (int)ft_strlen(board[0]));
-			x %= (int)ft_strlen(board[0]);
-			if (y > (int)ft_strlen(board[0]))
-				return (0);
+			startxy[0] = squares == 0 ? xy[0] : startxy[0];
+			startxy[1] = squares == 0 ? xy[1] : startxy[1];
+			ret[squares][0] = squares == 0 ? 0 : startxy[0] - xy[0];
+			ret[squares][1] = squares == 0 ? 0 : startxy[1] - xy[1];
+			ret[squares++][2] = 0;
 		}
-		place_tet(board, tets[i], x, y, i);
+		xy[1] += (++xy[0] / 4);
+		xy[0] %= 4;
 	}
-	if (is_solved(board, tet_num))
-	{
-		print_board(board);
-		return (1);
-	}
-	while (!solve_board(board, tets, tet_num))
-	{
-		if (is_placed(i, board))
-			rem_tet(board, i);
-		y += (++x / (int)ft_strlen(board[0]));
-		x %= (int)ft_strlen(board[0]);
-		while (!can_place(board, tets[i], x, y))
-		{
-			y += (++x / (int)ft_strlen(board[0]));
-			x %= (int)ft_strlen(board[0]);
-			if (y > (int)ft_strlen(board[0]))
-			{
-				if (i != 0)
-					return (0);
-				else
-				{
-					x = 0;
-					y = 0;
-					i = 0;
-					board = grow_board(board);
-				}
-				while(is_placed(i, board))
-					i++;
-			}
-		}
-		place_tet(board, tets[i], x, y, i);
-	}
-	return (1);
+	ret[squares] = NULL;
+	return (ret);
 }

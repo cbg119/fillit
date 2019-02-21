@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/20 13:58:29 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 03:42:49 by alkozma          ###   ########.fr       */
+/*   Created: 2019/02/21 07:23:23 by alkozma           #+#    #+#             */
+/*   Updated: 2019/02/21 07:24:47 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,47 +63,79 @@ char	**grow_board(char **board)
 	return (ret);
 }
 
-int		can_place(char **board, int **tet, int x, int y)
+int		is_solved(char **board, int tet_num)
 {
 	int i;
 
-	i = 0;
-	while (i < 4)
-	{
-		if (!board[y - tet[i][1]] ||
-				!board[y - tet[i][1]][x - tet[i][0]] ||
-				!EMPTY(board[y - tet[i][1]][x - tet[i][0]]))
+	i = -1;
+	while (++i < tet_num)
+		if (!is_placed(i, board))
 			return (0);
-		i++;
-	}
 	return (1);
 }
 
-void	place_tet(char **board, int **tet, int x, int y, int num)
+void	print_board(char **board)
 {
-	int		sq;
-
-	sq = -1;
-	while (tet[++sq])
-		board[y - tet[sq][1]][x - tet[sq][0]] = (num + 'A');
+	while (*board)
+	{
+		ft_putstr(*board++);
+		ft_putchar('\n');
+	}
 }
 
-int		is_placed(int num, char **board)
+int		solve_board(char **board, int ***tets, int tet_num)
 {
 	int i;
+	int x;
+	int y;
 
 	i = 0;
-	while (board[i])
-		if (ft_strchr(board[i++], (num + 'A')))
-			return (1);
-	return (0);
-}
-
-void	rem_tet(char **board, int num)
-{
-	int i;
-
-	i = 0;
-	while (board[i])
-		ft_tokreplc(board[i++], (num + 'A'), '.');
+	x = 0;
+	y = 0;
+	while (is_placed(i, board))
+		i++;
+	while (!is_placed(i, board))
+	{
+		while (!can_place(board, tets[i], x, y))
+		{
+			y += (++x / (int)ft_strlen(board[0]));
+			x %= (int)ft_strlen(board[0]);
+			if (y > (int)ft_strlen(board[0]))
+				return (0);
+		}
+		place_tet(board, tets[i], x, y, i);
+	}
+	if (is_solved(board, tet_num))
+	{
+		print_board(board);
+		return (1);
+	}
+	while (!solve_board(board, tets, tet_num))
+	{
+		if (is_placed(i, board))
+			rem_tet(board, i);
+		y += (++x / (int)ft_strlen(board[0]));
+		x %= (int)ft_strlen(board[0]);
+		while (!can_place(board, tets[i], x, y))
+		{
+			y += (++x / (int)ft_strlen(board[0]));
+			x %= (int)ft_strlen(board[0]);
+			if (y > (int)ft_strlen(board[0]))
+			{
+				if (i != 0)
+					return (0);
+				else
+				{
+					x = 0;
+					y = 0;
+					i = 0;
+					board = grow_board(board);
+				}
+				while (is_placed(i, board))
+					i++;
+			}
+		}
+		place_tet(board, tets[i], x, y, i);
+	}
+	return (1);
 }

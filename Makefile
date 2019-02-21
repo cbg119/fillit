@@ -6,7 +6,7 @@
 #    By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/18 23:42:22 by cbagdon           #+#    #+#              #
-#    Updated: 2019/02/20 14:33:22 by alkozma          ###   ########.fr        #
+#    Updated: 2019/02/21 07:15:42 by alkozma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = fillit
 SRCS = array.c \
 	   main.c \
 	   validate.c \
-	   board.c
+	   board.c \
+	   tetriminos.c
 
 OBJECTS = $(patsubst %.c,%.o,$(SRCS))
 

@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 14:39:52 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 04:57:59 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 07:17:34 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,4 @@ int		valid_tetrimino(char *arr)
 	}
 	CHECK_BAD(squares == 4 && (connections == 8 || connections == 6));
 	return (1);
-}
-
-int		**construct_tetrimino(char *line)
-{
-	int		xy[2];
-	int		squares;
-	int		startxy[2];
-	int		**ret;
-
-	xy[0] = 0;
-	xy[1] = 0;
-	squares = 0;
-	MEMCHK((ret = (int**)malloc(sizeof(int*) * 5)));
-	while (*line)
-	{
-		MEMCHK((ret[squares] = (int*)malloc(sizeof(int) * 3)));
-		if (FILLED(*line++) == 1)
-		{
-			startxy[0] = squares == 0 ? xy[0] : startxy[0];
-			startxy[1] = squares == 0 ? xy[1] : startxy[1];
-			ret[squares][0] = squares == 0 ? 0 : startxy[0] - xy[0];
-			ret[squares][1] = squares == 0 ? 0 : startxy[1] - xy[1];
-			ret[squares++][2] = 0;
-		}
-		xy[1] += (++xy[0] / 4);
-		xy[0] %= 4;
-	}
-	ret[squares] = NULL;
-	return (ret);
 }
