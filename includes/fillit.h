@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/20 15:51:13 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/20 16:14:43 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 */
 
 # define FILLED(c)				((c - '#' == 0) ? 1 : -1)
+# define EMPTY(c)				((c - '.' == 0) ? 1 : 0)
 # define CHECK_BAD(x)			if (x) return (0)
 # define VALID_CHAR(c)			((c == '#' || c == '.' || c == '\n') ? 1 : 0)
 # define MEMCHK(m)				if (!m) return (0)
@@ -51,6 +52,7 @@
 char			**fill_array(char **tetriminos, int fd);
 void			print_array(char **board, int tet_count);
 void			place_tet(char **board, int **tet, int x, int y, int num);
+void			print_board(char **board, int tet_count, int ***container);
 int				**construct_tetrimino(char *line);
 int				validate_file(int fd, int chars, int lines, int *tetriminos);
 char			**make_array(int tetriminos, char *file);

@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 13:58:29 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/20 15:50:24 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/20 16:14:08 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		can_place(char **board, int **tet, int x, int y)
 	{
 		if (!board[y - tet[i][1]] ||
 				!board[y - tet[i][1]][x - tet[i][0]] ||
-				FILLED(board[y - tet[i][1]][x - tet[i][0]]) == 1)
+				!EMPTY(board[y - tet[i][1]][x - tet[i][0]]))
 			return (0);
 		i++;
 	}

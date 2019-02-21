@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:27:56 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/20 15:53:47 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/20 16:17:04 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,15 @@ void	print_array(char **board, int tet_count)
 	}
 	i = 0;
 	board = init_board(tet_count);
-	if (can_place(board, container[0], 2, 2))
-		place_tet(board, container[0], 2, 2, 0);
 	i = 0;
 	while (board[i])
 	{
 		ft_putstr(board[i++]);
 		ft_putchar('\n');
 	}
+	print_board(board, tet_count, container);
 }
-
+	
 int		***build_offset_arr(char **board, int tet_count)
 {
 	int		i;
@@ -122,4 +121,39 @@ int		***build_offset_arr(char **board, int tet_count)
 		ret[i] = construct_tetrimino(board[i]);
 	ret[i] = NULL;
 	return (ret);
+}
+
+void	print_board(char **board, int tet_count, int ***container)
+{
+	int tet;
+	size_t x;
+	size_t y;
+	int num;
+
+	tet = 0;
+	x = 0;
+	y = 0;
+	num = 0;
+	tet_count++;
+	while (container[tet])
+	{
+		if (x > ft_strlen(board[0]) || y > ft_strlen(board[0]))
+		{
+			board = grow_board(board);
+			tet = 0;
+			x = 0;
+			y = 0;
+			num = 0;
+		}
+		if (can_place(board, container[tet], x, y))
+			place_tet(board, container[tet++], x, y, num++);
+		y += (++x / ft_strlen(board[0]));
+		x %= ft_strlen(board[0]);
+	}
+	while (*board)
+	{
+		ft_putstr(*board++);
+		ft_putchar('\n');
+	}
+	ft_putnbr(num);
 }
