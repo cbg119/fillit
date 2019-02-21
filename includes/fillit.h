@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 08:16:32 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 10:06:20 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 # define CHECK_BAD(x)			if (x) return (0)
 # define VALID_CHAR(c)			((c == '#' || c == '.' || c == '\n') ? 1 : 0)
 # define MEMCHK(m)				if (!m) return (0)
-# define ZERO_OUT(a, b, c)		(a = b = c = 0)
 # define ITERATE(a, b)			while (a) (b++)
 
 /*
@@ -68,7 +67,9 @@ int				can_place(char **board, int **tet, int x, int y);
 int				solve_board(char **board, int ***tets, int tet_num);
 int				is_placed(int num, char **board);
 int				find_and_place(char **board, int **tet, int x, int y);
+int				count_chars(char *str, char c);
 char			**grow_board(char **board);
 char			**init_board(int tetriminos);
+void			zero_out(int *a, int *b, int *c);
 
 #endif

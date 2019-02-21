@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:23:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 09:08:03 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 10:02:04 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		solve_board(char **board, int ***tets, int tet_num)
 	int i;
 	int xy[2];
 
-	ZERO_OUT(xy[0], xy[1], i);
+	zero_out(&xy[0], &xy[1], &i);
 	ITERATE((is_placed(i, board)), i);
 	CHECK_BAD(!find_and_place(board, tets[i], xy[0], xy[1]));
 	if (is_solved(board, tet_num))
@@ -104,7 +104,7 @@ int		solve_board(char **board, int ***tets, int tet_num)
 			if (xy[1] > (int)ft_strlen(board[0]))
 			{
 				CHECK_BAD(i != 0);
-				ZERO_OUT(xy[0], xy[1], i);
+				zero_out(&xy[0], &xy[1], &i);
 				board = grow_board(board);
 			}
 		}

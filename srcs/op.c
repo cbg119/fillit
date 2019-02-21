@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:54:19 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 07:59:32 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 10:07:19 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,11 @@ void	adv_xy(int board_len, int *x, int *y)
 {
 	*y += (++*x / board_len);
 	*x %= board_len;
+}
+
+void	zero_out(int *a, int *b, int *c)
+{
+	*a = 0;
+	*b = 0;
+	*c = 0;
 }
