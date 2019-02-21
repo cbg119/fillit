@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 05:09:50 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 08:16:32 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define CHECK_BAD(x)			if (x) return (0)
 # define VALID_CHAR(c)			((c == '#' || c == '.' || c == '\n') ? 1 : 0)
 # define MEMCHK(m)				if (!m) return (0)
+# define ZERO_OUT(a, b, c)		(a = b = c = 0)
+# define ITERATE(a, b)			while (a) (b++)
 
 /*
 **	***********
@@ -53,9 +55,10 @@
 
 char			**fill_array(char **tetriminos, int fd);
 void			print_array(char **board, int tet_count);
-void			place_tet(char **board, int **tet, int x, int y, int num);
-void			print_board(char **board);
+void			place_tet(char **board, int **tet, int x, int y);
+int				print_board(char **board);
 void			rem_tet(char **board, int num);
+void			adv_xy(int board_len, int *x, int *y);
 int				**construct_tetrimino(char *line);
 int				validate_file(int fd, int chars, int lines, int *tetriminos);
 char			**make_array(int tetriminos, char *file);
@@ -64,6 +67,7 @@ int				***build_offset_arr(char **board, int tet_count);
 int				can_place(char **board, int **tet, int x, int y);
 int				solve_board(char **board, int ***tets, int tet_num);
 int				is_placed(int num, char **board);
+int				find_and_place(char **board, int **tet, int x, int y);
 char			**grow_board(char **board);
 char			**init_board(int tetriminos);
 

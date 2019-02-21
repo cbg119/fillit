@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:22:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 07:24:14 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 08:28:01 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int		***build_offset_arr(char **board, int tet_count)
 	int		***ret;
 
 	i = -1;
+	if (tet_count == 0)
+		return (NULL);
 	MEMCHK((ret = (int***)malloc(sizeof(int**) * (tet_count + 1))));
 	while (++i < tet_count)
 	{

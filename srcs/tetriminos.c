@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:21:19 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 07:21:22 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 09:09:18 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,16 @@ int		can_place(char **board, int **tet, int x, int y)
 	return (1);
 }
 
-void	place_tet(char **board, int **tet, int x, int y, int num)
+void	place_tet(char **board, int **tet, int x, int y)
 {
 	int		sq;
+	int		num;
 
 	sq = -1;
+	num = 0;
+	if (is_placed(0, board))
+		while (is_placed(num, board))
+			num++;
 	while (tet[++sq])
 		board[y - tet[sq][1]][x - tet[sq][0]] = (num + 'A');
 }
@@ -53,6 +58,28 @@ void	rem_tet(char **board, int num)
 	int i;
 
 	i = 0;
-	while (board[i])
+	while (board[i] && is_placed(num, board))
 		ft_tokreplc(board[i++], (num + 'A'), '.');
+}
+
+int		find_and_place(char **board, int **tet, int x, int y)
+{
+	int		i;
+
+	i = 0;
+	if (is_placed(0, board))
+		while (is_placed(i, board))
+			i++;
+	while (!is_placed(i, board))
+	{
+		while (!can_place(board, tet, x, y))
+		{
+			y += (++x / (int)ft_strlen(board[0]));
+			x %= (int)ft_strlen(board[0]);
+			if (y > (int)ft_strlen(board[0]))
+				return (0);
+		}
+		place_tet(board, tet, x, y);
+	}
+	return (1);
 }

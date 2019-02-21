@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 14:39:52 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 07:17:34 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 09:13:31 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ int		validate_file(int fd, int chars, int lines, int *tetriminos)
 
 	while (read(fd, &buf, 1))
 	{
-		if (!VALID_CHAR(buf))
-			return (0);
-		else if (buf == '\n')
+		CHECK_BAD(!VALID_CHAR(buf));
+		if (buf == '\n')
 		{
 			lines++;
 			read(fd, &buf, 1);
@@ -38,6 +37,7 @@ int		validate_file(int fd, int chars, int lines, int *tetriminos)
 		else
 			chars++;
 	}
+	CHECK_BAD(lines > 0);
 	return (1);
 }
 
