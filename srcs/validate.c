@@ -6,38 +6,44 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 14:39:52 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 10:21:40 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:02:52 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
+void	line_cleanse(int *lines, int *tetriminos)
+{
+	*lines = 0;
+	*tetriminos += 1;
+}
+
 int		validate_file(int fd, int chars, int lines, int *tetriminos)
 {
+	int		new_lines;
 	char	buf;
 
+	new_lines = 0;
 	while (read(fd, &buf, 1))
 	{
 		CHECK_BAD(!VALID_CHAR(buf));
 		if (buf == '\n')
 		{
 			lines++;
-			read(fd, &buf, 1);
+			new_lines++;
+			new_lines += (read(fd, &buf, 1) && buf == '\n') ? 1 : 0;
 			CHECK_BAD(chars != 4 || (buf == '\n' && lines != 4) ||
 					!VALID_CHAR(buf));
 			chars = 0;
 			if (buf == '\n' && lines == 4)
-			{
-				lines = 0;
-				*tetriminos += 1;
-			}
+				line_cleanse(&lines, tetriminos);
 			else
 				chars++;
 		}
 		else
 			chars++;
 	}
-	CHECK_BAD(lines > 0);
+	CHECK_BAD(lines > 0 || new_lines != *tetriminos * 4 + *tetriminos - 1);
 	return (1);
 }
 

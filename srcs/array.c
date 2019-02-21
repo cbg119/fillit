@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:22:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 08:28:01 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 11:57:09 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		***build_offset_arr(char **board, int tet_count)
 	i = -1;
 	if (tet_count == 0)
 		return (NULL);
-	MEMCHK((ret = (int***)malloc(sizeof(int**) * (tet_count + 1))));
+	CHECK_BAD(!(ret = (int***)malloc(sizeof(int**) * (tet_count + 1))));
 	while (++i < tet_count)
 	{
 		CHECK_BAD(valid_tetrimino(board[i]));
@@ -95,10 +95,10 @@ int		**construct_tetrimino(char *line)
 	xy[0] = 0;
 	xy[1] = 0;
 	squares = 0;
-	MEMCHK((ret = (int**)malloc(sizeof(int*) * 5)));
+	CHECK_BAD(!(ret = (int**)malloc(sizeof(int*) * 5)));
 	while (*line)
 	{
-		MEMCHK((ret[squares] = (int*)malloc(sizeof(int) * 3)));
+		CHECK_BAD(!(ret[squares] = (int*)malloc(sizeof(int) * 3)));
 		if (FILLED(*line++) == 1)
 		{
 			startxy[0] = squares == 0 ? xy[0] : startxy[0];

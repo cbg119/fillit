@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:23:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 10:02:04 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 11:57:50 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ char	**init_board(int tetriminos)
 	sqsz = 0;
 	while (sqsz * sqsz < tetriminos * 4)
 		sqsz += 1;
-	MEMCHK((ret = (char**)malloc(sizeof(char*) * (sqsz + 1))));
+	CHECK_BAD(!(ret = (char**)malloc(sizeof(char*) * (sqsz + 1))));
 	y = -1;
 	while (++y < sqsz)
 	{
 		x = -1;
-		MEMCHK((ret[y] = (char*)malloc(sizeof(char) * (sqsz + 1))));
+		CHECK_BAD(!(ret[y] = (char*)malloc(sizeof(char) * (sqsz + 1))));
 		while (++x < sqsz)
 			ret[y][x] = '.';
 		ret[y][x] = '\0';
@@ -46,11 +46,11 @@ char	**grow_board(char **board)
 
 	size = ft_strlen(board[0]) + 1;
 	y = -1;
-	MEMCHK((ret = (char**)malloc(sizeof(char*) * (size + 1))));
+	CHECK_BAD(!(ret = (char**)malloc(sizeof(char*) * (size + 1))));
 	while (++y < size)
 	{
 		x = -1;
-		MEMCHK((ret[y] = (char*)malloc(sizeof(char) * (size + 1))));
+		CHECK_BAD(!(ret[y] = (char*)malloc(sizeof(char) * (size + 1))));
 		while (++x < size)
 			ret[y][x] = '.';
 		ret[y][x] = '\0';

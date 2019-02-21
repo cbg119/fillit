@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 10:06:20 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:03:25 by cbagdon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 # define EMPTY(c)				((c - '.' == 0) ? 1 : 0)
 # define CHECK_BAD(x)			if (x) return (0)
 # define VALID_CHAR(c)			((c == '#' || c == '.' || c == '\n') ? 1 : 0)
-# define MEMCHK(m)				if (!m) return (0)
 # define ITERATE(a, b)			while (a) (b++)
 
 /*
