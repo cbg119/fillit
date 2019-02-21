@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:22:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 11:57:09 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:28:03 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**make_array(int tetriminos, char *file)
 	close(fd);
 	if (!(container = build_offset_arr(tet_list, tetriminos)))
 		return (0);
-	board = init_board(tetriminos);
+	board = init_board(tetriminos, min_square(container));
 	solve_board(board, container, tetriminos);
 	return (board);
 }

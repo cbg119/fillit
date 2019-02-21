@@ -6,20 +6,20 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:23:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 11:57:50 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:28:02 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 
-char	**init_board(int tetriminos)
+char	**init_board(int tetriminos, int minsq)
 {
 	char	**ret;
 	int		sqsz;
 	int		x;
 	int		y;
 
-	sqsz = 0;
+	sqsz = minsq;
 	while (sqsz * sqsz < tetriminos * 4)
 		sqsz += 1;
 	CHECK_BAD(!(ret = (char**)malloc(sizeof(char*) * (sqsz + 1))));

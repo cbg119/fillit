@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:54:19 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 10:07:19 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:27:59 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,26 @@ void	zero_out(int *a, int *b, int *c)
 	*a = 0;
 	*b = 0;
 	*c = 0;
+}
+
+int		min_square(int ***container)
+{
+	int ret;
+	int a;
+	int b;
+
+	zero_out(&ret, &a, &b);
+	while (container[a])
+	{
+		while (container[a][b])
+		{
+			if (ABS(container[a][b][0]) > ret)
+				ret = ABS(container[a][b][0]);
+			if (ABS(container[a][b][1]) > ret)
+				ret = ABS(container[a][b][1]);
+			b++;
+		}
+		a++;
+	}
+	return (ret + 1);
 }

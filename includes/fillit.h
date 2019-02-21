@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 12:03:25 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:25:18 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ int				solve_board(char **board, int ***tets, int tet_num);
 int				is_placed(int num, char **board);
 int				find_and_place(char **board, int **tet, int x, int y);
 int				count_chars(char *str, char c);
+int				min_square(int ***container);
 char			**grow_board(char **board);
-char			**init_board(int tetriminos);
+char			**init_board(int tetriminos, int minsq);
 void			zero_out(int *a, int *b, int *c);
 
 #endif
