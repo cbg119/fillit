@@ -6,7 +6,7 @@
 #    By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/11 16:50:18 by cbagdon           #+#    #+#              #
-#    Updated: 2019/02/19 17:55:13 by cbagdon          ###   ########.fr        #
+#    Updated: 2019/02/20 21:19:45 by alkozma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ SRCS = ft_strcpy.c \
 	   ft_lstpush.c \
 	   ft_lstmap.c \
 	   ft_strccpy.c \
-	   get_next_line.c
+	   get_next_line.c \
+	   ft_tokreplc.c
 OBJECTS = $(patsubst %.c,%.o,$(SRCS))
 INLCUDES = includes/
 

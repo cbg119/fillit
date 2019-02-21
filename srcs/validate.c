@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 14:39:52 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 22:44:10 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/21 04:57:59 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,17 @@ int		valid_tetrimino(char *arr)
 		if (FILLED(arr[i]) == 1)
 		{
 			squares++;
-			if ((i > 3 && FILLED(arr[i - 4])) || FILLED(arr[i + 4]))
+			if ((i > 3 && FILLED(arr[i - 4]) == 1))
 				connections++;
-			if ((i > 0 && FILLED(arr[i - 1])) || FILLED(arr[i + 1]))
+			if (FILLED(arr[i + 4]) == 1)
+				connections++;
+			if ((i > 0 && FILLED(arr[i - 1]) == 1))
+				connections++;
+			if (FILLED(arr[i + 1]) == 1)
 				connections++;
 		}
 	}
-	CHECK_BAD(squares != 4 || (connections != 8 && connections != 6));
+	CHECK_BAD(squares == 4 && (connections == 8 || connections == 6));
 	return (1);
 }
 
@@ -83,7 +87,7 @@ int		**construct_tetrimino(char *line)
 		{
 			startxy[0] = squares == 0 ? xy[0] : startxy[0];
 			startxy[1] = squares == 0 ? xy[1] : startxy[1];
-			ret[squares][0] = squares == 0 ? 0 : xy[0] - startxy[0];
+			ret[squares][0] = squares == 0 ? 0 : startxy[0] - xy[0];
 			ret[squares][1] = squares == 0 ? 0 : startxy[1] - xy[1];
 			ret[squares++][2] = 0;
 		}

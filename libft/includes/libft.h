@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 17:58:47 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/18 12:50:41 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/02/21 05:05:37 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 */
 
 char				*ft_strccpy(char *dst, const char *src, const char c);
+void				ft_tokreplc(char *str, char tok, char c);
 
 /*
 **********************

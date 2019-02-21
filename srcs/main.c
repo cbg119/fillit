@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:21:17 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/19 14:38:05 by cbagdon          ###   ########.fr       */
+/*   Updated: 2019/02/21 04:34:34 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		main(int argc, char *argv[])
 {
 	int		fd;
 	int		tetriminos;
-	char	**board;
 
 	(void)argc;
 	tetriminos = 0;
@@ -24,8 +23,13 @@ int		main(int argc, char *argv[])
 	if (validate_file(fd, 0, 0, &tetriminos))
 	{
 		close(fd);
-		board = make_array(tetriminos, argv[1]);
-		print_array(board, tetriminos);
+		if (!make_array(tetriminos, argv[1]))
+		{
+			ft_putstr("error");
+			return (0);
+		}
 	}
+	else
+		ft_putstr("error");
 	return (0);
 }
