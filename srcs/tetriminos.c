@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:21:19 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/22 14:49:05 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/22 15:02:22 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	place_tet(char **board, int **tet, int x, int y)
 	int		num;
 
 	sq = -1;
-	num = 0;
-	if (is_placed(0, board))
-		while (is_placed(num, board))
-			num++;
+	num = tet[0][2];
 	while (tet[++sq])
 		board[y - tet[sq][1]][x - tet[sq][0]] = (num + 'A');
 }
@@ -65,18 +62,17 @@ void	rem_tet(char **board, int num)
 int		find_and_place(char **board, int **tet, int x, int y)
 {
 	int		i;
+	int		sz;
 
-	i = 0;
-	if (is_placed(0, board))
-		while (is_placed(i, board))
-			i++;
+	sz = (int)ft_strlen(board[0]);
+	i = tet[0][2];
 	while (!is_placed(i, board))
 	{
 		while (!can_place(board, tet, x, y))
 		{
-			y += (++x / (int)ft_strlen(board[0]));
-			x %= (int)ft_strlen(board[0]);
-			if (y > (int)ft_strlen(board[0]))
+			y += (++x / sz);
+			x %= sz;
+			if (y > sz)
 				return (0);
 		}
 		place_tet(board, tet, x, y);

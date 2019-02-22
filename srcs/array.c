@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:22:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 12:28:03 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/22 15:10:16 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ int		***build_offset_arr(char **board, int tet_count)
 	while (++i < tet_count)
 	{
 		CHECK_BAD(valid_tetrimino(board[i]));
-		ret[i] = construct_tetrimino(board[i]);
+		ret[i] = construct_tetrimino(board[i], i);
 	}
 	ret[i] = NULL;
 	return (ret);
 }
 
-int		**construct_tetrimino(char *line)
+int		**construct_tetrimino(char *line, int num)
 {
 	int		xy[2];
 	int		squares;
@@ -105,7 +105,7 @@ int		**construct_tetrimino(char *line)
 			startxy[1] = squares == 0 ? xy[1] : startxy[1];
 			ret[squares][0] = squares == 0 ? 0 : startxy[0] - xy[0];
 			ret[squares][1] = squares == 0 ? 0 : startxy[1] - xy[1];
-			ret[squares++][2] = 0;
+			ret[squares++][2] = num;
 		}
 		xy[1] += (++xy[0] / 4);
 		xy[0] %= 4;

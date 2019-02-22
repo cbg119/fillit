@@ -6,7 +6,7 @@
 /*   By: cbagdon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 13:40:05 by cbagdon           #+#    #+#             */
-/*   Updated: 2019/02/21 12:25:18 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/22 15:10:33 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			place_tet(char **board, int **tet, int x, int y);
 int				print_board(char **board);
 void			rem_tet(char **board, int num);
 void			adv_xy(int board_len, int *x, int *y);
-int				**construct_tetrimino(char *line);
+int				**construct_tetrimino(char *line, int num);
 int				validate_file(int fd, int chars, int lines, int *tetriminos);
 char			**make_array(int tetriminos, char *file);
 int				valid_tetrimino(char *arr);
