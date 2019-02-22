@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:23:23 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 12:28:02 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/22 14:44:04 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,21 @@ int		print_board(char **board)
 int		solve_board(char **board, int ***tets, int tet_num)
 {
 	int i;
-	int xy[2];
+	int xy[3];
 
 	zero_out(&xy[0], &xy[1], &i);
 	ITERATE((is_placed(i, board)), i);
 	CHECK_BAD(!find_and_place(board, tets[i], xy[0], xy[1]));
-	if (is_solved(board, tet_num))
+	if (i == tet_num - 1 && is_solved(board, tet_num))
 		return (print_board(board));
 	while (!solve_board(board, tets, tet_num))
 	{
 		rem_tet(board, i);
-		adv_xy((int)ft_strlen(board[0]), &xy[0], &xy[1]);
+		adv_xy((xy[2] = (int)ft_strlen(board[0])), &xy[0], &xy[1]);
 		while (!can_place(board, tets[i], xy[0], xy[1]))
 		{
-			adv_xy((int)ft_strlen(board[0]), &xy[0], &xy[1]);
-			if (xy[1] > (int)ft_strlen(board[0]))
+			adv_xy(xy[2], &xy[0], &xy[1]);
+			if (xy[1] > xy[2])
 			{
 				CHECK_BAD(i != 0);
 				zero_out(&xy[0], &xy[1], &i);

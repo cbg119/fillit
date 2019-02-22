@@ -6,7 +6,7 @@
 /*   By: alkozma <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/21 07:21:19 by alkozma           #+#    #+#             */
-/*   Updated: 2019/02/21 09:09:18 by alkozma          ###   ########.fr       */
+/*   Updated: 2019/02/22 14:49:05 by alkozma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	rem_tet(char **board, int num)
 	int i;
 
 	i = 0;
-	while (board[i] && is_placed(num, board))
+	while (board[i])
 		ft_tokreplc(board[i++], (num + 'A'), '.');
 }
 
